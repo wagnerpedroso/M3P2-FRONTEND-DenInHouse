@@ -1,0 +1,64 @@
+<div class="container">
+  <header>
+    <h3>Cadastrar Turma</h3>
+  </header>
+
+  <div class="form-area">
+    <div class="row-one">
+      <div class="div-one">
+        <div class="area-name">
+          <label>Nome</label> <br />
+          <input type="text" pInputText placeholder="Nome da turma" [(ngModel)]="courseClassDto.name" />
+          <small id="name-error" class="p-error block not-required">Nome da Turma inválido.</small>
+        </div>
+      </div>
+
+      <div class="div-two">
+        <div class="area-link">
+          <label>Link da Matriz</label> <br />
+          <input type="text" pInputText placeholder="Link da Matriz" [(ngModel)]="courseClassDto.matrixLink" />
+          <small id="matrizname-error" class="p-error block not-required">Link da Matriz inválido.</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="row-two">
+      <div class="div-three">
+        <div class="area-stack">
+          <label>Stack/Linguagens</label> <br />
+          <input type="text" pInputText placeholder="Front-End/Back-End" [(ngModel)]="courseClassDto.stack" />
+          <small id="stack-error" class="p-error block not-required">Stack/Linguagens inválido.</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="row-three">
+      <div class="div-four">
+        <div class="date-start">
+          <label>Início</label> <br />
+          <p-calendar [showIcon]="true" inputId="icon" dateFormat="dd/mm/yy" styleClass="calendar" [(ngModel)]="courseClassDto.initialDate" ></p-calendar>
+          <small id="initial-error" class="p-error block not-required">Initial Date inválido.</small>
+        </div>
+      </div>
+
+      <div class="div-five">
+        <div class="date-end">
+          <label>Fim</label> <br />
+          <p-calendar [showIcon]="true" inputId="icon" dateFormat="dd/mm/yy" [(ngModel)]="courseClassDto.endDate"></p-calendar>
+          <small id="end-error" class="p-error block not-required">End Date inválido.</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="row-four">
+      <span>Total de módulos: </span>
+      <p-dropdown [options]="quatityModule" [(ngModel)]="selectedModule" ></p-dropdown>
+    </div>
+
+    <div class="row five">
+      <div class="row-five">
+        <button pButton type="button" label="Avançar" (click)="nextForm()"></button>
+      </div>
+    </div>
+  </div>
+</div>

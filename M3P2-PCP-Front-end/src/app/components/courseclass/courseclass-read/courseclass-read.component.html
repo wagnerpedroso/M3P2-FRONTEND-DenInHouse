@@ -1,0 +1,65 @@
+<div class="container">
+    <header>
+        <h3>Cadastradas</h3>
+    </header>
+    <p-dialog header="{{headerModalText}}" [(visible)]="display" [modal]="true" [style]="{width: '50vw'}" [maximizable]="true"
+    [draggable]="false" [resizable]="false">
+
+    <div *ngIf="eventList | async as eventList"  class="table-in-modal">
+        <p-table
+            [value]="eventList" styleClass="p-datatable-gridlines" [paginator]="true" [rows]="5" [showCurrentPageReport]="true" responsiveLayout="scroll"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Tipo</th>
+                    <th>Usuário</th>
+                    <th>Data</th>
+                </tr>
+            </ng-template>
+            <ng-template let-event pTemplate="body">
+                <tr>
+                  <td>{{ event.eventType }}</td>
+                  <td>{{ event.userContext }}</td>
+                  <td>{{ event.timeStamp }}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+        <ng-template pTemplate="footer">
+            <p-button icon="pi pi-check" label="Ok" (click)="display=false" styleClass="p-button-text"></p-button>
+        </ng-template>
+    </p-dialog>
+    <div *ngIf="courseClassReadDto$ | async as courseClassReadDto"  class="table-area">
+        <p-table
+            [value]="courseClassReadDto" styleClass="p-datatable-gridlines" responsiveLayout="scroll" [paginator]="true" [rows]="5" [showCurrentPageReport]="true"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Id</th>
+                    <th>Turma</th>
+                    <th>Início</th>
+                    <th>Final</th>
+                    <th>Linguagem/stacks</th>
+                    <th></th>
+                </tr>
+            </ng-template>
+            <ng-template let-course pTemplate="body">
+                <tr [ngClass]="{'bg-bluegray-300':course.archive}">
+                  <td>{{ course.id }}</td>
+                  <td>{{ course.name }}</td>
+                  <td>{{ course.initialDate }}</td>
+                  <td>{{ course.endDate }}</td>
+                  <td>{{ course.stack }}</td>
+                    <td>
+                        <div class="buttons">
+                            <button class="edit" routerLink="/layout/turmas/atualizar/{{ course.id }}">Editar</button>
+                            <button class="history" (click)="openHistoryModal(course.id, course.name)">Histórico</button>
+                            <button class="archive" (click)="archive(course.id, course.archive)">{{(!course.archive)? "Arquivar": "Desarquivar"}}</button>
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+    <button routerLink="/layout/turmas/adicionar" class="add-button">Nova Turma</button>
+</div>
